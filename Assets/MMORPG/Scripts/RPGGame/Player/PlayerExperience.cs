@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 namespace Assets.MMORPG.Scripts.RPGGame.Player
 {
     public class PlayerExperience : Componet.Experience
     {
         void Start()
         {
-
+            // 测试当前等级与经验，减50经验
+            current += 200;
         }
 
         public override void OnDeath()

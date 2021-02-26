@@ -3,7 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 namespace Assets.MMORPG.Scripts.RPGGame.UI
 {
-    public class UIExperienceBar : MonoBehaviour
+
+    //角色经验条UI
+    //能否切换显示角色某声望条，技能修练条呢
+    public partial class UIExperienceBar : MonoBehaviour
     {
         public GameObject panel;
         public Slider slider;
