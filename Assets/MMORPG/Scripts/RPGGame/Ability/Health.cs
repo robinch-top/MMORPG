@@ -21,7 +21,18 @@ namespace Assets.MMORPG.Scripts.RPGGame.Ability
                 return baseThisLevel + endurance * 30;
             }
         }
+        // 基础的单位时间回血量
+        public int baseRecovery = 2;
+        // 获取总单位时间回血量
+        public override int recovery
+        {
+            get
+            {
+                return baseRecovery;
+            }
+        }
 
+        // 如果设置为非重生满能力值，这里设置重生血量为20
         void Start()
         {
             if (!spawnFull) current = 20;

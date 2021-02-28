@@ -18,12 +18,12 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
             {
                 panel.SetActive(true);
 
-                // 暂写死满血,满蓝都为200 来测试UI效果
-                healthSlider.value = (float)player.health / 200f;
-                healthStatus.text = player.health + " / " + 200;
 
-                manaSlider.value = (float)player.mana / 200f;
-                manaStatus.text = player.mana + " / " + 200;
+                healthSlider.value = player.health.Percent();
+                healthStatus.text = player.health.current + " / " + player.health.max;
+
+                manaSlider.value = player.mana.Percent();
+                manaStatus.text = player.mana.current + " / " + player.mana.max;
             }
             else panel.SetActive(false);
         }

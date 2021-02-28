@@ -2,12 +2,12 @@
 using System.Collections;
 namespace Assets.MMORPG.Scripts.RPGGame.Base
 {
-    public class Entity : MonoBehaviour
+    public class Entity : Base.NetBehaviourNonAlloc
     {
         /// <summary>
         /// 角色中文名称  
         /// </summary>
-        public string CNName;
+        //public string CNName;
 
         [Header("Components")]
         public Animator animator;
@@ -36,11 +36,11 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
         /// <summary>
         /// 角色血量
         /// </summary>
-        public int health;
+        public Ability.Health health;
         /// <summary>
         /// 角色蓝量  
         /// </summary>
-        public int mana;
+        public Ability.Mana mana;
 
         GameObject _target;
         /// <summary>
