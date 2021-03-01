@@ -141,6 +141,10 @@ namespace Assets.MMORPG.Scripts.RPGGame.Player
                 slots[toIndex] = temp;
             }
         }
+        public bool InventoryOperationsAllowed()
+        {
+            return false;
+        }
         // drag & drop /////////////////////////////////////////////////////////////
         /// -><summary> 放下拖放道具到格子的事件方法。</summary>
         void OnDragAndDrop_InventorySlot_InventorySlot(int[] slotIndices)
