@@ -10,7 +10,25 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
         public KeyCode hotKey = KeyCode.U;
         public GameObject panel;
         public UIEquipmentSlot slotPrefab;
+        /// <summary>
+        /// 格子父级
+        /// </summary>
         public Transform content;
+
+        /// <summary>
+        /// 0耐久度颜色
+        /// </summary>
+        public Color brokenDurabilityColor = Color.red;
+
+        /// <summary>
+        /// 低耐久度颜色
+        /// </summary>
+        public Color lowDurabilityColor = Color.magenta;
+
+        /// <summary>
+        /// 低装备耐久度阀值
+        /// </summary>
+        [Range(0.01f, 0.99f)] public float lowDurabilityThreshold = 0.2f;
 
         void Update()
         {
@@ -31,7 +49,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
                     for (int i = 0; i < player.equipment.slots.Count; ++i)
                     {
                         UIEquipmentSlot uislot = content.GetChild(i).GetComponent<UIEquipmentSlot>();
-                        uislot.dragAndDropable.name = i.ToString();
+                        uislot.dragAndDropable.name = i.ToString(); // drag and drop slot
                         Items.ItemSlot slot = player.equipment.slots[i];
 
                         // 显示装备部位名称
@@ -51,14 +69,26 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
                                 uislot.tooltip.text = slot.ToolTip();
                             // 装备可拖拽
                             uislot.dragAndDropable.dragable = true;
+
                             // 装备类道具，耐久度颜色
-                            // ...
-
-                            uislot.image.color = Color.white;
+                            if (slot.item.maxDurability > 0)
+                            {
+                                if (slot.item.durability == 0)
+                                    uislot.image.color = brokenDurabilityColor;
+                                else if (slot.item.DurabilityPercent() < lowDurabilityThreshold)
+                                    uislot.image.color = lowDurabilityColor;
+                                else
+                                    uislot.image.color = Color.white;
+                            }
+                            else uislot.image.color = Color.white;
                             uislot.image.sprite = slot.item.image;
-
                             // 有冷确时间的道具可使用装备
-                            // ...
+                            if (slot.item.data is ScriptableItems.UsableItem usable)
+                            {
+                                float cooldown = player.GetItemCooldown(usable.cooldownCategory);
+                                uislot.cooldownCircle.fillAmount = usable.cooldown > 0 ? cooldown / usable.cooldown : 0;
+                            }
+                            else uislot.cooldownCircle.fillAmount = 0;
 
                             // 可堆叠装备数量，如果只是一件不显示堆叠数量
                             uislot.amountOverlay.SetActive(slot.amount > 1);
@@ -70,10 +100,11 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
                         else
                         {
                             // 刷新无效项
-                            uislot.dragAndDropable.dragable = false;
                             uislot.tooltip.enabled = false;
+                            uislot.dragAndDropable.dragable = false;
                             uislot.image.color = Color.clear;
                             uislot.image.sprite = null;
+                            uislot.cooldownCircle.fillAmount = 0;
                             uislot.amountOverlay.SetActive(false);
                         }
                     }

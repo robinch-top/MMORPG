@@ -57,7 +57,9 @@ namespace Assets.MMORPG.Scripts.RPGGame.Data
         public int spirit { get; set; }
         public int physical { get; set; }
     }
-    // 装备格子信息结构
+    /// <summary>
+    /// 装备格子信息结构
+    /// </summary>
     [Serializable]
     public partial struct EquipSlotInfo
     {
@@ -65,7 +67,9 @@ namespace Assets.MMORPG.Scripts.RPGGame.Data
         public string catName;
         public Transform location;
     }
-    // 技能信息结构
+    /// <summary>
+    ///  技能信息结构
+    /// </summary>
     [Serializable]
     public struct SkillInfo
     {

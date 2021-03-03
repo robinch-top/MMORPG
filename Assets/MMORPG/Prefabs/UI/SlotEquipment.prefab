@@ -373,8 +373,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3228969610110021772}
   image: {fileID: 11461826}
-  amountOverlay: {fileID: 1696350647605798}
+  cooldownCircle: {fileID: 5506701771081674880}
   dragAndDropable: {fileID: 1287465485716148126}
+  amountOverlay: {fileID: 1696350647605798}
   amountText: {fileID: 114524096516534058}
   categoryOverlay: {fileID: 105726}
   categoryText: {fileID: 11439412}

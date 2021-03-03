@@ -236,5 +236,40 @@ namespace Assets.MMORPG.Scripts.RPGGame.Player
                 }
             }
         }
+        /// <summary>
+        /// 设置指定部位装备的耐久属性
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="val"></param>
+        public void SetEquipmentDurability(string type, int val)
+        {
+            int index = GetEquipmentIndex(type);
+            Items.ItemSlot itemSlot = slots[index];
+
+            // 结构体属性发生改变
+            itemSlot.item.durability = val;
+            // 要更新到他所在的数据容器，结构体是值类型而不是引用类型。
+            slots[index] = itemSlot;
+        }
+
+        /// <summary>
+        /// 获取指定部位装备index
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public int GetEquipmentIndex(string type)
+        {
+            int index = -1;
+            for (int i = 0; i < slots.Count; ++i)
+            {
+                ScriptableItems.EquipmentItem item = slots[i].item.data as ScriptableItems.EquipmentItem;
+                if (item.category == type)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
     }
 }
