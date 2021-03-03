@@ -40,11 +40,6 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
         {
             DestroyToolTip();
         }
-        // Use this for initialization
-        void Start()
-        {
-
-        }
         void OnDestroy()
         {
             DestroyToolTip();

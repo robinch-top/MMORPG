@@ -7,11 +7,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
     {
         [Header("Components")]
         public RectTransform rectTransform;
-        // Use this for initialization
-        void Start()
-        {
 
-        }
 
         // Update is called once per frame
         void Update()

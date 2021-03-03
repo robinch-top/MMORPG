@@ -88,11 +88,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
         {
             Destroy(currentlyDragged);
         }
-        // Use this for initialization
-        void Start()
-        {
 
-        }
 
 
     }

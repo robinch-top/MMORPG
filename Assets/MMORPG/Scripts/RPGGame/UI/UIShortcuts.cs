@@ -37,11 +37,6 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
         public Button quitButton;
 
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
 
         // Update is called once per frame
         void Update()
