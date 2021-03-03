@@ -51,4 +51,6 @@ namespace Assets.MMORPG.Scripts.RPGGame.Items
             return tip.ToString();
         }
     }
+    // 背包道具数据容器对象
+    public class SyncListItemSlot : Data.SyncList<ItemSlot> {}
 }

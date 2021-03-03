@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 namespace Assets.MMORPG.Scripts.RPGGame.UI
 {
     public class UIUtils : MonoBehaviour
     {
+        // 删除道具时,即使删除Cotent下的格子物体,还是会再创建新的格子实例
         public static void BalancePrefabs(GameObject prefab, int amount, Transform parent)
         {
             //在父项下实例化直到达到amount数量
@@ -18,9 +19,25 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
             for (int i = parent.childCount - 1; i >= amount; --i)
                 GameObject.Destroy(parent.GetChild(i).gameObject);
         }
+
+        // 使用Selectable.all查找当前是否有任何输入处于活动状态
         public static bool AnyInputActive()
         {
-            return true;
+            // 避免Linq.Any 不利于GC与性能!
+            foreach (Selectable sel in Selectable.allSelectablesArray)
+                if (sel is InputField inputField && inputField.isFocused)
+                    return true;
+            return false;
+        }
+
+        // 严谨的取消选择UI元素
+        //（点击有些地方时，会抛出错误，所以我们必须双重检查）
+        public static void DeselectCarefully()
+        {
+            if (!Input.GetMouseButton(0) &&
+                !Input.GetMouseButton(1) &&
+                !Input.GetMouseButton(2))
+                EventSystem.current.SetSelectedGameObject(null);
         }
     }
 }

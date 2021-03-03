@@ -1,6 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using Assets.MMORPG.Scripts.RPGGame.Base;
+using Mirror;
 namespace Assets.MMORPG.Scripts.RPGGame.Entity
 {
     public class Player : Base.Entity
@@ -13,8 +15,12 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
         /// <summary>
         /// 获取基类绑定的背包组件属性
         /// </summary>
-        public RPGGame.Player.PlayerInventory inventory;
+        public RPGGame.Player.PlayerInventory inventory => baseInventory as RPGGame.Player.PlayerInventory;
 
+        /// <summary>
+        /// 获取基类绑定的装备组件
+        /// </summary>
+        public RPGGame.Player.PlayerEquipment equipment => baseEquipment as RPGGame.Player.PlayerEquipment;
         /// <summary>
         /// 角色职业图标
         /// </summary>
@@ -30,10 +36,9 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
         public static Player localPlayer;
 
         /// <summary>
-        /// 角色道具CD的数据容器，简单版本可以是一个Dictionary<int, double>
+        /// 角色道具CD的数据容器，他是一个SyncDictionary<int, double>
         /// </summary>
-        Dictionary<int, double> itemCooldowns = new Dictionary<int, double>();
-
+        SyncDictionaryIntDouble itemCooldowns = new SyncDictionaryIntDouble();
 
         void Start()
         {
@@ -41,12 +46,20 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
             localPlayer = this;
 
         }
+
+
         // item cooldowns /////////////////////////////////////////////////////
         /// -><summary><c>GetItemCooldown</c> 获取道具的冷却时间</summary>
         public float GetItemCooldown(string cooldownCategory)
         {
-            // 暂时不写，等待后面课时
-            // ...
+            // 获取稳定的哈希以减少带宽
+            int hash = cooldownCategory.GetStableHashCode();
+
+            // 查找同类物品冷确
+            if (itemCooldowns.TryGetValue(hash, out double cooldownEnd))
+            {
+                return NetworkTime.time >= cooldownEnd ? 0 : (float)(cooldownEnd - NetworkTime.time);
+            }
 
             // none found
             return 0;
@@ -54,9 +67,14 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
         /// -><summary><c>SetItemCooldown</c> 设置道具的冷却时间</summary>
         public void SetItemCooldown(string cooldownCategory, float cooldown)
         {
-            // 暂时不写，等待后面课时
-            // ...
+            // 获取稳定的哈希以减少带宽
+            int hash = cooldownCategory.GetStableHashCode();
+
+            // save end time
+            itemCooldowns[hash] = NetworkTime.time + cooldown;
         }
+
+
         // death /////////////////////////////////////////////////////////////
         /// -><summary><c>OnDeath</c> 玩家死亡时调用的方法，重写了基类方法。</summary>
         public override void OnDeath()
@@ -67,4 +85,5 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
             Debug.Log("光荣战死...");
         }
     }
+    public class SyncDictionaryIntDouble : Data.SyncDictionary<int, double> { }
 }

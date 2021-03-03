@@ -1,33 +1,45 @@
 ﻿using UnityEngine;
+using System;
+
 using System.Collections;
 namespace Assets.MMORPG.Scripts.RPGGame.Base
 {
-    public class Entity : Base.NetBehaviourNonAlloc
+    //Player，NPC，Monster等实体的父对象类
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(AudioSource))]
+    public partial class Entity : NetBehaviourNonAlloc
     {
-        /// <summary>
-        /// 角色中文名称  
-        /// </summary>
-        //public string CNName;
-
         [Header("Components")]
         public Animator animator;
         new public Collider collider;
         public AudioSource audioSource;
 
         /// <summary>
+        /// 基类绑定背包组件  
+        /// </summary>
+        public Componet.Inventory baseInventory;
+
+        /// <summary>
         /// 角色战斗或脱战状态  
         /// </summary>
         public bool inbattle = false;
 
-        [SerializeField] float _gold = 0f;
+        [SerializeField] long _gold = 0;
         /// <summary>
         /// 角色拥有的金币  
         /// </summary>
-        public float gold
+        public long gold
         {
             get { return _gold; }
-            set { _gold = Mathf.Max(value, 0); }
+            set { _gold = Math.Max(value, 0); }
         }
+
+        /// <summary>
+        /// 角色动作状态
+        /// </summary>
+        [SerializeField] string _state = "IDLE";
+        public string state => _state;
 
         /// <summary>
         /// 角色等级  
@@ -41,7 +53,10 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
         /// 角色蓝量  
         /// </summary>
         public Ability.Mana mana;
-
+        /// <summary>
+        /// 基类绑定装备组件  
+        /// </summary>
+        public Componet.Equipment baseEquipment;
         GameObject _target;
         /// <summary>
         /// 角色目标 
@@ -59,24 +74,14 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
         }
 
         // death /////////////////////////////////////////////////////////////
-        /// -><summary><c>OnDeath</c> 角色死亡时可以被子类调用的虚方法。
-        /// 比如死亡时清除角色的目标属性值，这是任何种类的角色都要执行的，
-        /// 所以在基类的OnDeath方法可以清除目标 target = null。
-        /// 当需要实现在子类可以重写这个方法，但又不强制必须重写时定义虚方法
-        /// </summary>
+        /// -><summary><c>OnDeath</c> 角色死亡时可以被子类调用的虚方法,
+        /// 清除角色的目标属性值。</summary>
         public virtual void OnDeath()
         {
-            // 清除目标
+            //调用死亡动画，声音，躺了
+            Debug.Log("啊!我躺了"); //暂时用在输出面板打印一句话代替
+                                // 清除目标
             target = null;
-        }
-        void Awake()
-        {
-
-        }
-        // Use this for initialization
-        void Start()
-        {
-            
         }
     }
 }
