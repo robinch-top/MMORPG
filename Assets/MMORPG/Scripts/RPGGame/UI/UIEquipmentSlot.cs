@@ -11,6 +11,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
     public class UIEquipmentSlot : MonoBehaviour
     {
         public UIShowToolTip tooltip;
+        public Button button;
         public Image image;
         public Image cooldownCircle;
         public UIDragAndDropable dragAndDropable;

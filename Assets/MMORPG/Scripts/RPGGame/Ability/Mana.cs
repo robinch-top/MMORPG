@@ -6,11 +6,14 @@ namespace Assets.MMORPG.Scripts.RPGGame.Ability
     // 角色蓝量组件
     [RequireComponent(typeof(Componet.Level))]
     [DisallowMultipleComponent]
-    public  class Mana : Ability
+    public class Mana : Ability
     {
 
         public Base.LinearInt baseMana = new Base.LinearInt { baseValue = 100 };
-        public int intellect = 0;
+        // 缓存实现IManaBonus的组件实例
+        IManaBonus[] _bonusComponents;
+        IManaBonus[] bonusComponents =>
+            _bonusComponents ?? (_bonusComponents = GetComponents<IManaBonus>());
 
         // 计算总蓝量
         // 这里定每点智力16蓝
@@ -19,7 +22,20 @@ namespace Assets.MMORPG.Scripts.RPGGame.Ability
             get
             {
                 int baseThisLevel = baseMana.Get(level.current);
+
                 return baseThisLevel + intellect * 16;
+            }
+        }
+
+        //获取智力总量
+        public int intellect
+        {
+            get
+            {
+                int bonus = 0;
+                foreach (IManaBonus bonusComponent in bonusComponents)
+                    bonus += bonusComponent.GetIntellectBonus();
+                return bonus;
             }
         }
         // 基础的单位时间回蓝量
@@ -30,7 +46,10 @@ namespace Assets.MMORPG.Scripts.RPGGame.Ability
         {
             get
             {
-                return baseRecovery;
+                int bonus = 0;
+                foreach (IManaBonus bonusComponent in bonusComponents)
+                    bonus += bonusComponent.GetManaRecoveryBonus();
+                return baseRecovery + bonus;
             }
         }
 

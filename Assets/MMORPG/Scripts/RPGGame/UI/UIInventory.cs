@@ -56,7 +56,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
                             int icopy = i;
                             uislot.button.onClick.SetListener(() =>
                             {
-                                if (slot.item.data is ScriptableItems.UsableItem usable && usable.CanUse(player, icopy))
+                                if (slot.item.data is ScriptableItems.UsableItem usable && usable.CanUse(player, icopy, slot.item))
                                 {
                                     print(slot.item.data.GetType());
                                     // 使用道具调用的方法在这里 

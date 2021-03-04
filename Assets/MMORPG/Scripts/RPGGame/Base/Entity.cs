@@ -14,7 +14,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
         public Animator animator;
         new public Collider collider;
         public AudioSource audioSource;
-
+        public Componet.Combat combat;
         /// <summary>
         /// 基类绑定背包组件  
         /// </summary>

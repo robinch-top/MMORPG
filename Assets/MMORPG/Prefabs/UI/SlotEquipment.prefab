@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 3228969610110021772}
+  button: {fileID: 11453662}
   image: {fileID: 11461826}
   cooldownCircle: {fileID: 5506701771081674880}
   dragAndDropable: {fileID: 1287465485716148126}

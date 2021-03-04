@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.MMORPG.Scripts.RPGGame.Base;
 namespace Assets.MMORPG.Scripts.RPGGame.UI
 {
 
@@ -63,6 +64,16 @@ namespace Assets.MMORPG.Scripts.RPGGame.UI
                         /*==================================================================*/
                         if (slot.amount > 0)
                         {
+                            // 在背包中使用道具的点击事件
+                            int icopy = i;
+                            uislot.button.onClick.SetListener(() => {
+                                if (slot.item.data is ScriptableItems.UsableItem usables && usables.CanUse(player, icopy, slot.item))
+                                {
+                                    print(slot.item.data.GetType());
+                                    // 调用使用道具的方法 
+                                    player.equipment.CmdUseItem(icopy);
+                                }
+                            });
                             // 装备鼠标经过提示
                             uislot.tooltip.enabled = true;
                             if (uislot.tooltip.IsVisible())

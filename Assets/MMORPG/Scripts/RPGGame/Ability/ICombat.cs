@@ -1,0 +1,93 @@
+﻿using UnityEngine;
+using System.Collections;
+namespace Assets.MMORPG.Scripts.RPGGame.Ability
+{
+    public interface ICombatBonus
+    {
+        /// <summary>
+        /// 从武器装备获得的dps值
+        /// </summary>
+        /// <returns></returns>
+        float GetDpsBonus();
+        /// <summary>
+        /// 从武器装备获得的攻速值<
+        /// </summary>
+        /// <returns></returns>
+        float GetAttackRateBonus();
+        /// <summary>
+        /// 武器伤害值
+        /// </summary>
+        /// <returns></returns>
+        int GetHurtBonus();
+        /// <summary>
+        /// 法术伤害强度<
+        /// </summary>
+        /// <returns></returns>
+        int GetMagicBonus();
+        /// <summary>
+        /// 物理伤害加成
+        /// </summary>
+        /// <returns></returns>
+        int GetPhysicalBonus();
+        /// <summary>
+        /// 法术命中
+        /// </summary>
+        /// <returns></returns>
+        float GetMagicHitrateBonus();
+        /// <summary>
+        /// 物理命中
+        /// </summary>
+        /// <returns></returns>
+        float GetPhysicHitrateBonus();
+        /// <summary>
+        /// 法术暴击 
+        /// </summary>
+        /// <returns></returns>
+        float GetMagicCriticalBonus();
+        /// <summary>
+        /// 物理暴击
+        /// </summary>
+        /// <returns></returns>
+        float GetPhysicCriticalBonus();
+        /// <summary>
+        /// 角色敏捷属性值
+        /// </summary>
+        /// <returns></returns>
+        int GetAgilityBonus();
+        /// <summary>
+        /// 角色力量属性值
+        /// </summary>
+        /// <returns></returns>
+        int GetStrengthBonus();
+        /// <summary>
+        /// 角色精神属性值
+        /// </summary>
+        /// <returns></returns>
+        int GetSpiritBonus();
+        /// <summary>
+        /// 防御护甲属性值
+        /// </summary>
+        /// <returns></returns>
+        int GetArmorBonus();
+        /// <summary>
+        /// 闪避机率 
+        /// </summary>
+        /// <returns></returns>
+        float GetDodgeBonus();
+        /// <summary>
+        /// 抵抗伤害比率
+        /// </summary>
+        /// <returns></returns>
+        float GetBlockBonus();
+        /// <summary>
+        /// 物理抗性值
+        /// </summary>
+        /// <returns></returns>
+        int GetPhysicalDefenseBonus();
+        /// <summary>
+        /// 法术抗性值
+        /// </summary>
+        /// <returns></returns>
+        int GetMagicDefenseBonus();
+    }
+}

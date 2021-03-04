@@ -9,6 +9,8 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
 
         [Header("Equipment Attributes")]
 
+        [Header("Equipment Attributes")]
+
         /// <summary>
         /// 装备位置
         /// </summary>
@@ -49,6 +51,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
         /// 装备法术攻击值
         /// </summary>
         public int magic;
+
         /// <summary>
         /// 装备法术暴击与命中值
         /// </summary>
@@ -64,7 +67,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
         /// <summary>
         /// 装备闪避率
         /// </summary>
-        public float dodgeBonus;
+        public float dodgeChanceBonus;
         /// <summary>
         /// 装备格挡/抵抗率
         /// </summary>
@@ -79,6 +82,14 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
         /// </summary>
         public int manaBonus;
         /// <summary>
+        /// 武器装备秒伤
+        /// </summary>
+        public float dpsBonus;
+        /// <summary>
+        /// 武器攻速
+        /// </summary>
+        public float attackRate;
+        /// <summary>
         /// 装备武器伤害值
         /// </summary>
         public int hurtBonus;
@@ -89,11 +100,11 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
         /// <summary>
         /// 装备法术防御值
         /// </summary>
-        public int deMagic;
+        public int magicDefense;
         /// <summary>
         /// 装备物理防御值
         /// </summary>
-        public int dePhysical;
+        public int physicalDefense;
 
         /// <summary>
         /// 装备生命回复值
@@ -122,11 +133,11 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
             tip.Replace("{CATEGORY}", category);
             tip.Replace("{DAMAGEBONUS}", hurtBonus.ToString());
             tip.Replace("{ARMORBONUS}", armorBonus.ToString());
-            tip.Replace("{DEMAGIC}", deMagic.ToString());
-            tip.Replace("{DEPHYSICAL}", dePhysical.ToString());
+            tip.Replace("{DEMAGIC}", magicDefense.ToString());
+            tip.Replace("{DEPHYSICAL}", physicalDefense.ToString());
             tip.Replace("{HEALTHBONUS}", healthBonus.ToString());
             tip.Replace("{MANABONUS}", manaBonus.ToString());
-            tip.Replace("{DODGEBONUS}", dodgeBonus.ToString());
+            tip.Replace("{DODGEBONUS}", dodgeChanceBonus.ToString());
             tip.Replace("{BLOCKCHANCEBONUS}", blockChanceBonus.ToString("F1"));
 
             return tip.ToString();
@@ -136,7 +147,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
         /// 判断装备道具是否可用的方法,
         /// 需要判断装备界面是否有匹配他的装备界面位置,
         /// 需要判断装备是否有冷却时间和耐久度（有些饰品装备需要主动使用才对属性生效的道具，是有冷却时间的）。</summary>
-        public override bool CanUse(Entity.Player player, int inventoryIndex)
+        public override bool CanUse(Entity.Player player, int inventoryIndex, Items.Item item)
         {
             return FindEquipableSlotFor(player, inventoryIndex) != -1;
         }

@@ -19,11 +19,11 @@ namespace Assets.MMORPG.Scripts.RPGGame.ScriptableItems
             string.IsNullOrWhiteSpace(_cooldownCategory) ? name : _cooldownCategory;
 
         // usage ///////////////////////////////////////////////////////////////////
-        public virtual bool CanUse(Entity.Player player, int inventoryIndex)
+        public virtual bool CanUse(Entity.Player player, int Index, Items.Item item)
         {
             // 检查冷确时间与装备类道具的耐久
             return player.GetItemCooldown(cooldownCategory) == 0 &&
-                   player.inventory.slots[inventoryIndex].item.CheckDurability();
+                   item.CheckDurability();
         }
         public virtual void Use(Entity.Player player, int inventoryIndex)
         {

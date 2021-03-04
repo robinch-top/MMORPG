@@ -40,6 +40,8 @@ namespace Assets.MMORPG.Scripts.RPGGame.Player
             };
 
             LoadPlayerEquipped(warriorEquipDatas);
+            SetEquipmentDurability("Hands", 10);
+            SetEquipmentDurability("Head", 0);
         }
         void Start()
         {
@@ -48,6 +50,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.Player
             // 初始刷新一次装备模型
             // ...
         }
+
 
         // 加载角色装备
         public void LoadPlayerEquipped(Data.EquipInfo[] datas)
@@ -270,6 +273,26 @@ namespace Assets.MMORPG.Scripts.RPGGame.Player
                 }
             }
             return index;
+        }
+        public bool InventoryOperationsAllowed()
+        {
+            return player.state == "IDLE" ||
+                   player.state == "MOVING" ||
+                   player.state == "CASTING";
+        }
+
+        // CmdUseItem /////////////////////////////////////////////////////////////
+        /// -><summary> 判断装备是否可用和使用装备的方法。</summary>
+        public void CmdUseItem(int index)
+        {
+            // 判断装备道具是否可用
+            if (InventoryOperationsAllowed() &&
+                0 <= index && index < slots.Count && slots[index].amount > 0 &&
+                slots[index].item.data is ScriptableItems.UsableItem usable)
+            {
+                Items.Item item = slots[index].item;
+                usable.Use(player, index);
+            }
         }
     }
 }
