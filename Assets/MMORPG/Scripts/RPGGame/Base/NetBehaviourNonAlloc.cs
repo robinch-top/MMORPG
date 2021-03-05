@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Assets.MMORPG.Scripts.RPGGame.Base
 {
-    public class NetBehaviourNonAlloc : MonoBehaviour
+    public class NetBehaviourNonAlloc : Network.NetworkBehaviour
     {
 
         // 获取和设置MonoBehaviour对象的base name

@@ -22,6 +22,10 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
         /// </summary>
         public RPGGame.Player.PlayerEquipment equipment => baseEquipment as RPGGame.Player.PlayerEquipment;
         /// <summary>
+        /// 获取绑定的技能工具条组件
+        /// </summary>
+        public RPGGame.Player.PlayerSkillbar skillbar;
+        /// <summary>
         /// 角色职业图标
         /// </summary>
         public Sprite classIcon;
@@ -40,10 +44,20 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
         /// </summary>
         SyncDictionaryIntDouble itemCooldowns = new SyncDictionaryIntDouble();
 
+        GameObject _nextTarget;
+        /// <summary>
+        /// 角色下一个目标 
+        /// 想一下，为什么target放在Entity中，而nextTarget放在Player中
+        /// </summary>
+        public Base.Entity nextTarget
+        {
+            get { return _nextTarget != null ? _nextTarget.GetComponent<Base.Entity>() : null; }
+            set { _nextTarget = value != null ? value.gameObject : null; }
+        }
         void Start()
         {
             // 暂时就一个角色放在场景里，先起用赋值localPlayer
-            localPlayer = this;
+            //localPlayer = this;
 
         }
 
@@ -83,6 +97,20 @@ namespace Assets.MMORPG.Scripts.RPGGame.Entity
             base.OnDeath();
             //输出自己的死亡宣言
             Debug.Log("光荣战死...");
+        }
+        // CmdSetTarget /////////////////////////////////////////////////////////////
+        /// -><summary>设置角色目标。</summary>
+        public void CmdSetTarget(Network.NetworkIdentity ni)
+        {
+            // validate
+            if (ni != null)
+            {
+                // 直接切换目标，或技能已经在施放中，则在技能释放后切换作为下一个目标
+                if (state == "IDLE" || state == "MOVING" || state == "STUNNED")
+                    target = ni.GetComponent<Base.Entity>();
+                else if (state == "CASTING")
+                    nextTarget = ni.GetComponent<Base.Entity>();
+            }
         }
     }
     public class SyncDictionaryIntDouble : Data.SyncDictionary<int, double> { }

@@ -31,7 +31,9 @@ namespace Assets.MMORPG.Scripts.RPGGame.Data
         public string password { get; set; }
     }
 
-    // 道具信息结构
+    /// <summary>
+    /// 道具信息结构
+    /// </summary>
     [Serializable]
     public struct ItemInfo
     {
@@ -42,7 +44,9 @@ namespace Assets.MMORPG.Scripts.RPGGame.Data
         public int index { get; set; }
     }
 
-    // 装备信息结构
+    /// <summary>
+    /// 装备信息结构
+    /// </summary>
     [Serializable]
     public struct EquipInfo
     {
@@ -74,7 +78,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.Data
     public struct SkillInfo
     {
         public string name { get; set; }
-        public int skillID { get; set; }
+        public int skillId { get; set; }
         public float distance { get; set; }
         public int level { get; set; }
         public float castTime { get; set; }

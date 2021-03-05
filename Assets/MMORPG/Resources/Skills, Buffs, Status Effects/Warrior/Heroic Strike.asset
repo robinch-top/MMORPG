@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aad9544efd57f647906e1a5fc705451, type: 3}
+  m_Name: Heroic Strike
+  m_EditorClassIdentifier: 
+  followupDefaultAttack: 0
+  skillName: "\u82F1\u52C7\u6253\u51FB"
+  SkillID: 1003
+  attackType: 0
+  toolTip: "<b>{NAME} Lvl {LEVEL}</b>\n\u767E\u5206\u767E\u7729\u6655\u76EE\u6807\uFF0C\u5E76\u9020\u6210\u5927\u91CF\u7269\u7406\u4F24\u5BB3\u3002\n\nDamage:
+    {DAMAGE}\nStun Chance: {STUNCHANCE}%\nStun Time: {STUNTIME}s\nCast Time: {CASTTIME}\nCooldown:
+    {COOLDOWN}\nCast Range: {CASTRANGE}\nMana Costs: {MANACOSTS}"
+  image: {fileID: 21300000, guid: 79f14da96075740ba80e57fc29195170, type: 3}
+  learnDefault: 0
+  showCastBar: 0
+  cancelCastIfTargetDied: 1
+  allowMovement: 0
+  predecessor: {fileID: 11400000, guid: 88f51d092fdf64bb0bf352cae8c522a0, type: 2}
+  predecessorLevel: 2
+  requiredWeaponCategory: Weapon
+  requiredLevel:
+    baseValue: 0
+    bonusPerLevel: 0
+  requiredSkillExperience:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxLevel: 5
+  manaCosts:
+    baseValue: 20
+    bonusPerLevel: 1
+  castTime:
+    baseValue: 1.5
+    bonusPerLevel: 0
+  cooldown:
+    baseValue: 6
+    bonusPerLevel: 0
+  castRange:
+    baseValue: 3.3
+    bonusPerLevel: 0
+  castSound: {fileID: 0}
+  damage:
+    baseValue: 75
+    bonusPerLevel: 5
+  stunChance:
+    baseValue: 1
+    bonusPerLevel: 0
+  stunTime:
+    baseValue: 6
+    bonusPerLevel: 0.5

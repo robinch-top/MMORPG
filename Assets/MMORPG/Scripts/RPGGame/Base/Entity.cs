@@ -15,6 +15,7 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
         new public Collider collider;
         public AudioSource audioSource;
         public Componet.Combat combat;
+        public Componet.SkillsComponet skills;
         /// <summary>
         /// 基类绑定背包组件  
         /// </summary>
@@ -24,6 +25,16 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
         /// 角色战斗或脱战状态  
         /// </summary>
         public bool inbattle = false;
+
+        /// <summary>
+        /// 角色眩晕结束时间
+        /// </summary>
+        [HideInInspector] public double stunTimeEnd;
+
+        /// <summary>
+        /// 角色是否在安全区
+        /// </summary>
+        [HideInInspector] public bool inSafeZone;
 
         [SerializeField] long _gold = 0;
         /// <summary>
@@ -66,7 +77,14 @@ namespace Assets.MMORPG.Scripts.RPGGame.Base
             get { return _target != null ? _target.GetComponent<Entity>() : null; }
             set { _target = value != null ? value.gameObject : null; }
         }
-
+        // CanAttack /////////////////////////////////////////////////////////////
+        /// -><summary>判断是否可攻击目标。主要是判断双方都存活，并且不是攻击自己</summary>
+        public virtual bool CanAttack(Entity entity)
+        {
+            return health.current > 0 &&
+                   entity.health.current > 0 &&
+                   entity != this;
+        }
         void Update()
         {
             // 暂时什么也不用写,肯定会有需要写点什么的时候的

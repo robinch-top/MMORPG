@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aad9544efd57f647906e1a5fc705451, type: 3}
+  m_Name: Normal Attack (Warrior)
+  m_EditorClassIdentifier: 
+  followupDefaultAttack: 1
+  skillName: "\u666E\u901A\u653B\u51FB"
+  SkillID: 1001
+  attackType: 0
+  toolTip: "<b>{NAME} Lvl {LEVEL}</b>\n\u666E\u901A\u653B\u51FB\uFF01\u9ED8\u8BA4\u653B\u51FB\u6280\u80FD\n\nDamage:
+    {DAMAGE}\nCast Time: {CASTTIME}\nCooldown: {COOLDOWN}\nCast Range: {CASTRANGE}"
+  image: {fileID: 21300000, guid: ee8cb878fb4994c029fd13d79791e030, type: 3}
+  learnDefault: 1
+  showCastBar: 0
+  cancelCastIfTargetDied: 1
+  allowMovement: 1
+  predecessor: {fileID: 0}
+  predecessorLevel: 1
+  requiredWeaponCategory: 
+  requiredLevel:
+    baseValue: 1
+    bonusPerLevel: 1
+  requiredSkillExperience:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxLevel: 4
+  manaCosts:
+    baseValue: 0
+    bonusPerLevel: 0
+  castTime:
+    baseValue: 1
+    bonusPerLevel: 0
+  cooldown:
+    baseValue: 0
+    bonusPerLevel: 0
+  castRange:
+    baseValue: 2.3
+    bonusPerLevel: 0
+  castSound: {fileID: 0}
+  damage:
+    baseValue: 5
+    bonusPerLevel: 10
+  stunChance:
+    baseValue: 0
+    bonusPerLevel: 0
+  stunTime:
+    baseValue: 0
+    bonusPerLevel: 0

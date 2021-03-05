@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using TMPro;
 using System;
+using Mirror;
 using Assets.MMORPG.Scripts.RPGGame.Ability;
 
 namespace Assets.MMORPG.Scripts.RPGGame.Componet
@@ -17,18 +18,24 @@ namespace Assets.MMORPG.Scripts.RPGGame.Componet
 
     public enum AttackType { physical, magic }
     public enum DamageType { Normal, Block, Crit }
-    public class Combat :Base.NetBehaviourNonAlloc
+    public class Combat : Base.NetBehaviourNonAlloc
     {
+        /// <summary>
+        /// 角色是否无敌不可战胜
+        /// </summary>
+        public bool invincible = false;
         /// <summary>
         /// 获取所属角色的Level组件,public但不序列化
         /// </summary>
         [NonSerialized]
         public Level level;
+        [Header("Damage Popup")]
+        public GameObject damagePopupPrefab;
         ////////////////////////////////////////////////////////////////////////////
         // 获取及缓存 角色上的装备，技能，宠物坐骑等组件实例
-       ICombatBonus[] _bonusComponents;
-       ICombatBonus[] bonusComponents =>
-            _bonusComponents ?? (_bonusComponents = GetComponents<ICombatBonus>());
+        ICombatBonus[] _bonusComponents;
+        ICombatBonus[] bonusComponents =>
+             _bonusComponents ?? (_bonusComponents = GetComponents<ICombatBonus>());
 
 
         public Base.LinearInt baseArmor = new Base.LinearInt { baseValue = 10 };
@@ -315,6 +322,97 @@ namespace Assets.MMORPG.Scripts.RPGGame.Componet
                 critical = physicCritical + 30; //暂时加30暴击看效果
             }
             return critical;
+        }
+        /// <summary>还没有服务端这里模仿一个处理技能伤害的方法 </summary>
+        public virtual void DealDamageAt(Base.Entity caster, AttackType type, int skillDamage, float stunChance = 0, float stunTime = 0)
+        {
+            DamageType damageType = DamageType.Normal;
+
+            Base.Entity victim = caster.target; // 目标实体
+            Combat vCombat = victim.combat; // 目标的Combat组件
+
+
+            int damageDealt = 0;
+            int amount = caster.combat.Attack(type) + skillDamage;
+            int deAmount = vCombat.DeAttack(type);
+
+            // 是不是不可战胜的,比如npc
+            if (!vCombat.invincible)
+            {
+                // dodge
+                if (UnityEngine.Random.value < vCombat.dodgeChance / 100)
+                {
+                    damageType = DamageType.Block;
+                }
+                // deal damage
+                else
+                {
+                    // 减少去防御与抵抗效果
+                    damageDealt = Mathf.Max(amount - deAmount, 1);
+
+                    // 触发暴击
+                    if (UnityEngine.Random.value < AttackCritical(type) / 100)
+                    {
+                        damageDealt = damageDealt * 2;
+                        damageType = DamageType.Crit;
+                    }
+
+                    // 处理伤害结果
+                    victim.health.current -= damageDealt;
+
+                }
+                // 通知发起攻击方武器掉耐久和防御攻击方装备掉耐久
+                // ...
+
+                // 攻击目标是否死亡
+                // ...
+            }
+
+            // 判断目标aggro范围,决定是否继续追击
+            // victim.OnAggro(entity);
+
+            // 这里是直接调用前端受到伤害的方法，实际在服务端这是向前端发消息
+            vCombat.RpcOnReceivedDamaged(victim, damageDealt, damageType);
+
+            // 是否有机率造成目标眩晕
+            if (UnityEngine.Random.value < stunChance)
+            {
+                // 只需要更新角色的stunTimeEnd属性，角色的状态update中就会更新眩晕状态
+                double newStunEndTime = NetworkTime.time + stunTime;
+                victim.stunTimeEnd = Math.Max(newStunEndTime, caster.stunTimeEnd);
+            }
+        }/// <summary>前端受到伤害调用方法 </summary>
+        public void RpcOnReceivedDamaged(Base.Entity victim, int amount, DamageType damageType)
+        {
+            // 伤害跳动数字
+            ShowDamagePopup(victim, amount, damageType);
+
+            // 调用委托方法，角色受伤动作等
+            // ...
+        }
+
+        /// <summary>显示伤害数字方法 </summary>
+        void ShowDamagePopup(Base.Entity victim, int amount, DamageType damageType)
+        {
+            // 产生伤害弹出UI（如果有的话）并设置文本
+            if (damagePopupPrefab != null)
+            {
+                // 这里是将伤害数字显示在角色右侧，如果放在头顶最简单不需要做坐标转换
+                // 如果将数字显示在挡住角色前面的位置，要做世界空间UI的自定义着色器
+                Bounds bounds = victim.collider.bounds;
+                Vector3 position = new Vector3(bounds.center.x, bounds.max.y, bounds.center.z);
+                GameObject popup = Instantiate(damagePopupPrefab, position, Quaternion.identity);
+
+                // 了解 Translate ，不论攻击者视角怎么围绕目标转，
+                // 伤害数字都在目标右侧一定距离显示
+                popup.transform.Translate(Camera.main.transform.right * 1.5f);
+                if (damageType == DamageType.Normal)
+                    popup.GetComponentInChildren<TextMeshPro>().text = amount.ToString();
+                else if (damageType == DamageType.Block)
+                    popup.GetComponentInChildren<TextMeshPro>().text = "<i>格挡!</i>";
+                else if (damageType == DamageType.Crit)
+                    popup.GetComponentInChildren<TextMeshPro>().text = amount + " 暴击!";
+            }
         }
     }
 }
