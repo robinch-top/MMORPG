@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f1ed111bec9874c833eaa6d5103429, type: 3}
+  m_Name: Vigor Potion
+  m_EditorClassIdentifier: 
+  maxStack: 50
+  itemName: "\u521D\u7EA7\u6D3B\u529B\u836F\u6C34"
+  itemID: 12004
+  maxDurability: 0
+  buyPrice: 4
+  sellPrice: 5
+  itemMallPrice: 4
+  sellable: 1
+  tradable: 0
+  destroyable: 1
+  toolTip: '<b>{ItemName}</b>
+
+    Restores some Health and Mana.
+
+
+    Restores
+    {USAGEHEALTH} Health on use.
+
+    Restores {USAGEMANA} Mana on use.
+
+    Destroyable:
+    {DESTROYABLE}
+
+    Sellable: {SELLABLE}
+
+    Tradable: {TRADABLE}
+
+    Required
+    Level: {MINLEVEL}
+
+
+    Amount: {AMOUNT}
+
+    Price: {BUYPRICE} Gold
+
+    <i>Sells
+    for: {SELLPRICE} Gold</i>'
+  image: {fileID: 21300000, guid: b4afc0a4fe2e94f4e815a402eadc9c6c, type: 3}
+  minLevel: 1
+  cooldown: 3
+  _cooldownCategory: 
+  usageHealth: 20
+  usageMana: 20
+  usageExperience: 0

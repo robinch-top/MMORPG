@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdb94dc30d837c4491ff6c2983b2117, type: 3}
+  m_Name: Strong Hit
+  m_EditorClassIdentifier: 
+  followupDefaultAttack: 1
+  skillName: "\u5F3A\u5316\u653B\u51FB"
+  SkillID: 1002
+  attackType: 0
+  toolTip: "<b>{NAME} Lvl {LEVEL}</b>\n\u5F3A\u529B\u7684\u7269\u7406\u653B\u51FB\uFF01\n\nDamage:
+    {DAMAGE}\nStun Chance: {STUNCHANCE}%\nStun Time: {STUNTIME}s\nCast Time: {CASTTIME}\nCooldown:
+    {COOLDOWN}\nCast Range: {CASTRANGE}\nMana Costs: {MANACOSTS}"
+  image: {fileID: 21300000, guid: 11e9e0a49822a4919adf05bddeb0f9f2, type: 3}
+  learnDefault: 0
+  showCastBar: 1
+  cancelCastIfTargetDied: 1
+  allowMovement: 0
+  predecessor: {fileID: 11400000, guid: 605fccd420d8e495891132829d3ac497, type: 2}
+  predecessorLevel: 1
+  requiredWeaponCategory: Weapon
+  requiredLevel:
+    baseValue: 0
+    bonusPerLevel: 0
+  requiredSkillExperience:
+    baseValue: 0
+    bonusPerLevel: 0
+  maxLevel: 3
+  manaCosts:
+    baseValue: 5
+    bonusPerLevel: 1
+  castTime:
+    baseValue: 2.133
+    bonusPerLevel: 0
+  cooldown:
+    baseValue: 4
+    bonusPerLevel: 0
+  castRange:
+    baseValue: 2.3
+    bonusPerLevel: 0
+  castSound: {fileID: 0}
+  damage:
+    baseValue: 25
+    bonusPerLevel: 5
+  stunChance:
+    baseValue: 0.25
+    bonusPerLevel: 0.02
+  stunTime:
+    baseValue: 4
+    bonusPerLevel: 0.5

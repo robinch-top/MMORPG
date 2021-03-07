@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71ca88a8c12b4a4ba9e9175a1e0f69c, type: 3}
+  m_Name: Moon Sword
+  m_EditorClassIdentifier: 
+  maxStack: 1
+  itemName: "\u6708\u795E\u4E4B\u5251"
+  itemID: 20010
+  maxDurability: 100
+  buyPrice: 10
+  sellPrice: 5
+  itemMallPrice: 10
+  sellable: 1
+  tradable: 1
+  destroyable: 1
+  toolTip: "<b><color=#228fbd>{ItemName}</color></b>\n<color=#00ffffff>Blacksmith\u7684\u5E38\u89C4\u6B66\u5668</color>
+    \n\n\u529B\u91CF\uFF1A{STRENGTH} \n\u7269\u7406\u653B\u51FB\uFF1A{PHYSICAL} \n<color=#00ff00ff>\u654F\u6377:
+    +{AGILITY}</color> \n<color=#00ff00ff>\u547D\u4E2D: +{HIT}%</color> \n\nRequired
+    Level: {MINLEVEL}\n\u6570\u91CF: {AMOUNT}\nbuy: {BUYPRICE} Gold\n<i>Sell: {SELLPRICE}
+    Gold</i>"
+  image: {fileID: 21300000, guid: 9c37349526149451d9e813424a3e3cd5, type: 3}
+  minLevel: 1
+  cooldown: 0
+  _cooldownCategory: 
+  category: Weapon
+  modelPrefab: {fileID: 0}
+  endurance: 5
+  intellect: 0
+  strength: 0
+  agility: 20
+  spirit: 0
+  physical: 20
+  magic: 0
+  magicCritical: 0
+  magicHitrate: 0
+  physicCritical: 0.05
+  physicHitrate: 0.03
+  dodgeChanceBonus: 0
+  blockChanceBonus: 0
+  healthBonus: 0
+  manaBonus: 0
+  dpsBonus: 67.3
+  attackRate: 1.5
+  hurtBonus: 15
+  armorBonus: 10
+  magicDefense: 0
+  physicalDefense: 0
+  healthRecovery: 0
+  manaRecovery: 0
+  requiredAmmo: {fileID: 0}
