@@ -1,3 +1,4 @@
+using Assets.MMORPG.Scripts.RPGGame.Data;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,24 +21,24 @@ namespace Assets.MMORPG.Scripts.RPGGame.Player
         {
             // 暂时写死一份战士装备信息数据在此
             // 这里没有提供的其它属性的数据,就会使用装备资源数据对象中设置的值
-            Data.EquipInfo[] warriorEquipDatas = new Data.EquipInfo[8]{
-            new Data.EquipInfo{CatType="Shoulders",itemID=20002,amount=1,
+            EquipInfo[] warriorEquipDatas = new EquipInfo[8]{
+            new EquipInfo{CatType="Shoulders",itemID=20002,amount=1,
                 endurance=5,strength=4,physical=3,intellect=2,agility=4},
-            new Data.EquipInfo{CatType="Chest",itemID=20003,amount=1,
+            new EquipInfo{CatType="Chest",itemID=20003,amount=1,
                 endurance=10,strength=6,physical=1,intellect=5,agility=3},
-            new Data.EquipInfo{CatType="Feet",itemID=20007,amount=1,
+            new EquipInfo{CatType="Foot",itemID=20007,amount=1,
                 physical=1,intellect=12,agility=3},
-            new Data.EquipInfo{CatType="Weapon",itemID=20004,amount=1,
+            new EquipInfo{CatType="Weapon",itemID=20004,amount=1,
                 endurance=2,strength=15,physical=9,spirit=6,agility=8},
-            new Data.EquipInfo{CatType="Legs",itemID=20006,amount=1,
+            new EquipInfo{CatType="Legs",itemID=20006,amount=1,
                 endurance=5,strength=2,physical=2},
-            new Data.EquipInfo{CatType="Hands",itemID=20005,amount=1,
+            new EquipInfo{CatType="Wrist",itemID=20005,amount=1,
                 endurance=15,strength=9,physical=8,intellect=0,agility=4},
-            new Data.EquipInfo{CatType="Head",itemID=20001,amount=1,
-                endurance=8,strength=7,physical=4,spirit=2,agility=4},
-            new Data.EquipInfo{CatType="Ammo",itemID=20011,amount=23,
+            new EquipInfo{CatType="Head",itemID=20001,amount=1,
+                endurance=8,physical=4,spirit=2,agility=4},
+            new EquipInfo{CatType="Offhand",itemID=20008,amount=23,
                 endurance=12,strength=5}
-            };
+        };
 
             LoadPlayerEquipped(warriorEquipDatas);
             SetEquipmentDurability("Hands", 10);
