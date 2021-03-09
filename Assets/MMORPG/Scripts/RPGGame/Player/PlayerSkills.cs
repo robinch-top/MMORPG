@@ -9,9 +9,9 @@ public class PlayerSkills : SkillsComponet
     {
         // 暂时写死一份战士技能信息数据在此
         SkillInfo[] warriorSkills = new SkillInfo[3]{
-            new SkillInfo{name="Normal Attack (Warrior)",skillID=1001},
-            new SkillInfo{name="Strong Hit",skillID=1002},
-            new SkillInfo{name="Hard Shell",skillID=1003}
+            new SkillInfo{name="Normal Attack (Warrior)",skillId=1001},
+            new SkillInfo{name="Strong Hit",skillId=1002},
+            new SkillInfo{name="Hard Shell",skillId=1003}
         };
         LoadPlayerSkills(warriorSkills);
     }
@@ -20,7 +20,7 @@ public class PlayerSkills : SkillsComponet
     public void LoadPlayerSkills(SkillInfo[] datas){
         skillTemplates = new ScriptableSkill[datas.Length];
         for(int i=0;i<datas.Length;++i){
-            skillTemplates.SetValue(ScriptableSkill.dict[datas[i].skillID],i);
+            skillTemplates.SetValue(ScriptableSkill.dict[datas[i].skillId],i);
         }
         foreach (ScriptableSkill skillData in skillTemplates)
             skills.Add(new Skill(skillData));

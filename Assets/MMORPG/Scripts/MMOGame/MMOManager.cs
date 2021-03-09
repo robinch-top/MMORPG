@@ -18,8 +18,7 @@ namespace Mirror
             if (singleton == null) singleton = this;
         }
 
-        public void CmdQuitGame()
-        {
+        public void RpcQuitWorld(){
             MapHelper.Back2LobbyAsync().Coroutine();
         }
 

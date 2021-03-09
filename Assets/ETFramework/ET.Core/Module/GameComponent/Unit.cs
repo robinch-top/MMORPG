@@ -60,6 +60,7 @@ namespace ETModel
 	[HideInHierarchy]
 	public sealed class Unit: Entity
 	{
+		public long UserId { get; set;}
 		public void Awake(GameObject gameObject)
 		{
 			this.GameObject = gameObject;

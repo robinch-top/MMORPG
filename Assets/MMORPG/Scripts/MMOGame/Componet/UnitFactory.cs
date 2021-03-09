@@ -9,16 +9,17 @@ namespace MMOGame
             GameObject prefab = UnitResources.Get($"{type}");
 	        GameObject go = UnityEngine.Object.Instantiate(prefab);
 	        Unit unit = ComponentFactory.CreateWithId<Unit, GameObject>(id, go);
-
-            SyncType syncType = Game.Scene.GetComponent<NetSyncComponent>().type;
-            if(syncType == SyncType.Frame){
-	            unit.AddComponent<FrameMoveComponent>();
-            }else if(syncType == SyncType.State){
-                unit.AddComponent<MoveComponent>();
-                unit.AddComponent<TurnComponent>();
-                unit.AddComponent<UnitPathComponent>();
-            }
+	        unit.AddComponent<FrameMoveComponent>();
             
+			UnitComponent unitComponent = Game.Scene.GetComponent<UnitComponent>();
+            unitComponent.Add(unit);
+            return unit;
+        }
+
+        public static Unit Create(long id, GameObject go)
+        {
+	        Unit unit = ComponentFactory.CreateWithId<Unit, GameObject>(id, go);
+            //unit.AddComponent<CharacterMoveComponent>();
 			UnitComponent unitComponent = Game.Scene.GetComponent<UnitComponent>();
             unitComponent.Add(unit);
             return unit;
@@ -26,15 +27,7 @@ namespace MMOGame
 
 
         public static void Remove(Unit unit){
-            SyncType syncType = Game.Scene.GetComponent<NetSyncComponent>().type;
-            if(syncType == SyncType.Frame){
-	            unit.RemoveComponent<FrameMoveComponent>();
-            }else if(syncType == SyncType.State){
-                unit.RemoveComponent<MoveComponent>();
-                unit.RemoveComponent<TurnComponent>();
-                unit.RemoveComponent<UnitPathComponent>();
-            }
-
+	        unit.RemoveComponent<FrameMoveComponent>();
             UnitComponent unitComponent = Game.Scene.GetComponent<UnitComponent>();
             unitComponent.Remove(unit.Id);
             unit.Dispose();

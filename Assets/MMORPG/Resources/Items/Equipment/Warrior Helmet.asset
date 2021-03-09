@@ -31,7 +31,8 @@ MonoBehaviour:
   cooldown: 0
   _cooldownCategory: 
   category: Head
-  modelPrefab: {fileID: 0}
+  modelPrefab: {fileID: 8530923824321910380, guid: f79fdb5b436e33942a30f99c0d889529,
+    type: 3}
   endurance: 8
   intellect: 0
   strength: 3
@@ -43,14 +44,15 @@ MonoBehaviour:
   magicHitrate: 0
   physicCritical: 0
   physicHitrate: 0
-  dodgeBonus: 0
+  dodgeChanceBonus: 0
   blockChanceBonus: 0
   healthBonus: 0
   manaBonus: 0
+  dpsBonus: 0
+  attackRate: 0
   hurtBonus: 0
   armorBonus: 0
-  deMagic: 0
-  dePhysical: 0
+  magicDefense: 0
+  physicalDefense: 0
   healthRecovery: 0
   manaRecovery: 0
-  durability: 0

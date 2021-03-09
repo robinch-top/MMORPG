@@ -15,6 +15,7 @@ namespace MMOGame{
 
 		public void Start()
         {
+			Time.fixedDeltaTime = 1f / 60;
 			// 取得管理组件
 			Manager.RPG = RPGManager.singleton;
 			
@@ -38,9 +39,10 @@ namespace MMOGame{
 				Game.Scene.AddComponent<GlobalConfigComponent>();
 				Game.Scene.AddComponent<NetOuterComponent>();
 				Game.Scene.AddComponent<ResourcesComponent>();
-				Game.Scene.AddComponent<PlayerComponent>();
+
 				Game.Scene.AddComponent<UnitComponent>();
 				Game.Scene.AddComponent<UIComponent>();
+				Game.Scene.AddComponent<GamerComponent>();
 
 				// 下载ab包
 				await BundleHelper.DownloadBundle();
@@ -56,10 +58,8 @@ namespace MMOGame{
 				UnitConfig unitConfig = (UnitConfig)Game.Scene.GetComponent<ConfigComponent>().Get(typeof(UnitConfig), 1001);
 				Log.Debug($"config {JsonHelper.ToJson(unitConfig)}");
 
-				// 网络同步方式组件
-				Game.Scene.AddComponent<NetSyncComponent,SyncType>(SyncType.State);
 
-				Game.EventSystem.Run(EventIdType.InitStart);
+				Game.EventSystem.Run(EventIdType.GameLogin);
 
 				//Game.EventSystem.Run(EventIdType.TestHotfixSubscribMonoEvent, "TestHotfixSubscribMonoEvent");
 			}
@@ -74,6 +74,11 @@ namespace MMOGame{
 			OneThreadSynchronizationContext.Instance.Update();
 			Game.EventSystem.Update();
 		}
+
+		private void FixedUpdate()
+        {
+            Game.EventSystem.FixedUpdate();
+        }
 
 		private void LateUpdate()
 		{

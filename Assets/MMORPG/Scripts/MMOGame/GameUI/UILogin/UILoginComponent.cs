@@ -25,11 +25,10 @@ namespace MMOGame
 
         //是否正在登录中（避免登录请求还没响应时连续点击登录）
         public bool isLogining;
-        //是否正在注册中（避免登录请求还没响应时连续点击注册）
-        public bool isRegistering;
 
         public void Awake()
         {
+            
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
             // 初始化数据
@@ -37,11 +36,12 @@ namespace MMOGame
             password = rc.Get<GameObject>("Password").GetComponent<InputField>();
             prompt = rc.Get<GameObject>("Prompt").GetComponent<Text>();
             this.isLogining = false;
-            this.isRegistering = false;
 
             // 添加事件
             rc.Get<GameObject>("LoginButton").GetComponent<Button>().onClick.Add(() => LoginBtnOnClick());
             rc.Get<GameObject>("RegisterButton").GetComponent<Button>().onClick.Add(() => RegisterBtnOnClick());
+
+            Manager.RPG.lastUI = UIState.UILogin;
         }
 
         public void LoginBtnOnClick()
@@ -50,17 +50,23 @@ namespace MMOGame
             {
                 return;
             }
+            if(account.text == ""){
+                prompt.text = "账号名不能为空！";
+                return;
+            }
+
+            if(password.text == ""){
+                prompt.text = "密码不能为空！";
+                return;
+            }
             this.isLogining = true;
-            Game.EventSystem.Run(EventIdType.GameSelection);
+
+            // 调用登录请求
+            RealmHelper.Login(this.account.text, this.password.text).Coroutine();
         }
 
         public void RegisterBtnOnClick()
         {
-            if (this.isRegistering || this.IsDisposed)
-            {
-                return;
-            }
-            this.isRegistering = true;
             Game.EventSystem.Run(EventIdType.GameRegister);
         }
 	}

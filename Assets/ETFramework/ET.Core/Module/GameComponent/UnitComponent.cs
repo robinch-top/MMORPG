@@ -21,7 +21,7 @@ namespace ETModel
 		private readonly Dictionary<long, Unit> idUnits = new Dictionary<long, Unit>();
 #if !SERVER
 		public static UnitComponent Instance { get; private set; }
-		//public Unit MyUnit;
+		public Unit MyUnit;
 		public void Awake()
 		{
 			Instance = this;

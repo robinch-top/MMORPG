@@ -6,6 +6,9 @@ using Mirror;
 public partial class Player : Entity
 {
     public string CNName;
+
+    public long CharaId;
+    public long UnitId;
     
     /// <summary>
     /// 绑定经验组件
@@ -40,6 +43,7 @@ public partial class Player : Entity
     /// 全局本地玩家
     /// </summary>
     public static Player localPlayer;
+
 
     /// <summary>
     /// 角色道具CD的数据容器，他是一个SyncDictionary<int, double>
