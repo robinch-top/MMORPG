@@ -14,14 +14,14 @@ public class NetworkManagerEditor : Editor
 
     protected void Init()
     {
-        if (spawnList == null)
+        if (this.spawnList == null)
         {
 
-            networkManager = target as NetworkManager;
+            this.networkManager = target as NetworkManager;
 
-            spawnListProperty = serializedObject.FindProperty("spawnPrefabs");
+            this.spawnListProperty = base.serializedObject.FindProperty("spawnPrefabs");
 
-            spawnList = new ReorderableList(serializedObject, spawnListProperty)
+            this.spawnList = new ReorderableList(base.serializedObject, this.spawnListProperty)
             {
                 drawHeaderCallback = DrawHeader,
                 drawElementCallback = DrawChild,
@@ -37,13 +37,13 @@ public class NetworkManagerEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        Init();
-        DrawDefaultInspector();
+        this.Init();
+        base.DrawDefaultInspector();
         EditorGUI.BeginChangeCheck();
-        spawnList.DoLayoutList();
+        this.spawnList.DoLayoutList();
         if (EditorGUI.EndChangeCheck())
         {
-            serializedObject.ApplyModifiedProperties();
+            this.serializedObject.ApplyModifiedProperties();
         }
     }
 
@@ -87,23 +87,23 @@ public class NetworkManagerEditor : Editor
 
     internal void AddButton(ReorderableList list)
     {
-        spawnListProperty.arraySize += 1;
+        this.spawnListProperty.arraySize += 1;
         list.index = spawnListProperty.arraySize - 1;
 
-        SerializedProperty obj = spawnListProperty.GetArrayElementAtIndex(spawnListProperty.arraySize - 1);
+        SerializedProperty obj = this.spawnListProperty.GetArrayElementAtIndex(spawnListProperty.arraySize - 1);
         obj.objectReferenceValue = null;
 
-        spawnList.index = spawnList.count - 1;
+        this.spawnList.index = spawnList.count - 1;
 
-        Changed(list);
+        this.Changed(list);
     }
 
     internal void RemoveButton(ReorderableList list)
     {
-        spawnListProperty.DeleteArrayElementAtIndex(spawnList.index);
-        if (list.index >= spawnListProperty.arraySize)
+        this.spawnListProperty.DeleteArrayElementAtIndex(spawnList.index);
+        if (list.index >= this.spawnListProperty.arraySize)
         {
-            list.index = spawnListProperty.arraySize - 1;
+            list.index = this.spawnListProperty.arraySize - 1;
         }
     }
 }

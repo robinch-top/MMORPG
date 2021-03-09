@@ -7,12 +7,12 @@ namespace Mirror
 {
     public enum NetworkState { Offline, Login, Lobby, World }
     public partial class RPGManager : NetworkManager
-    {   
+    {
         public static RPGManager singleton { get; private set; }
         public static NetworkIdentity localIdentity { get; private set; }
-        
+
         public NetworkState state = NetworkState.Offline;
-        [HideInInspector] public List<Player> playerClasses = new List<Player>(); 
+        [HideInInspector] public List<Player> playerClasses = new List<Player>();
 
         public Transform loginCameraLocation;
         public Transform selectionCameraLocation;
@@ -32,7 +32,7 @@ namespace Mirror
         /// 获取Loading
         /// </summary>
         public GameObject loading;
-        
+
 
         public void Awake()
         {
@@ -42,29 +42,32 @@ namespace Mirror
             playerClasses = FindPlayerClasses();
 
         }
-
-        public void LoadCharacterToScene(GameObject go){
+        public void LoadCharacterToScene(GameObject go)
+        {
             go.GetComponent<CameraController>().enabled = true;
             Transform spawn = GameObject.Find("SpawnLocation").transform;
             go.transform.position = spawn.position;
 
             // 让Player持有当前Player实例，可静态调用
-            Player.localPlayer = go.GetComponent<Player>();  
+            Player.localPlayer = go.GetComponent<Player>();
             // 让MMOManager持有当前Identity实例，可静态调用
-            localIdentity =  go.GetComponent<NetworkIdentity>(); 
+            localIdentity = go.GetComponent<NetworkIdentity>();
         }
 
-        public void ResetPlayer(){
+        public void ResetPlayer()
+        {
             Player.localPlayer.gameObject.GetComponent<CameraController>().enabled = false;
             Camera.main.transform.SetParent(transform.root, false);
             Destroy(Player.localPlayer.gameObject);
-            
+
             Player.localPlayer = null;
             localIdentity = null;
         }
 
-        public void CameraTo(NetworkState state){
-            switch(state){
+        public void CameraTo(NetworkState state)
+        {
+            switch (state)
+            {
                 case NetworkState.Login:
                     Camera.main.transform.position = loginCameraLocation.position;
                     Camera.main.transform.rotation = loginCameraLocation.rotation;
@@ -75,7 +78,6 @@ namespace Mirror
                     break;
             }
         }
-
         /// 从spawnPrefabs中取得玩家类型的角色对象
         public List<Player> FindPlayerClasses()
         {

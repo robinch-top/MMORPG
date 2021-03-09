@@ -4,7 +4,7 @@ namespace MMOGame
     {
         public const string InitStart = "InitStart";
         public const string BackLobby = "BackLobby";
-        
+
         public const string GameRegister = "GameRegister";
         public const string GameSelection = "GameSelection";
 
@@ -14,6 +14,7 @@ namespace MMOGame
 
         public const string UnitLoadFinished = "UnitLoadFinished";
         public const string EnterMapFinish = "EnterMapFinish";
+        public const string BackSelection = "BackSelection";
 
     }
 }

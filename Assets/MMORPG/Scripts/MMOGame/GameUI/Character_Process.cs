@@ -3,7 +3,7 @@ using Mirror;
 using ETModel;
 namespace MMOGame
 {
-	[Event(EventIdType.InitStart)]
+    [Event(EventIdType.InitStart)]
     public class InitStart_CreateLogin : AEvent
     {
         public override void Run()
@@ -35,7 +35,6 @@ namespace MMOGame
             Game.Scene.GetComponent<UIComponent>().Create(UIType.UISelection);
         }
     }
-
     [Event(EventIdType.CharacterCreation)]
     public class Character_Creation : AEvent
     {
@@ -68,8 +67,6 @@ namespace MMOGame
             Game.Scene.GetComponent<UIComponent>().Remove(UIType.UISelection);
         }
     }
-
-
     [Event(EventIdType.EnterMapFinish)]
     public class EnterMap_Finish : AEvent
     {
