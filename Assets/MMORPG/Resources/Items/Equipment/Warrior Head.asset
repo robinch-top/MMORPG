@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea28e6fa2069fe34e8809e5bd5b9e7c1, type: 3}
+  m_Name: Warrior Head
+  m_EditorClassIdentifier: 
+  maxStack: 1
+  itemName: "\u6218\u6597\u5934\u76D4"
+  itemID: 20001
+  maxDurability: 100
+  buyPrice: 10
+  sellPrice: 5
+  itemMallPrice: 10
+  sellable: 1
+  tradable: 1
+  destroyable: 1
+  toolTip: "<b><color=#228fbd>{ItemName}</color></b>\n<color=#00ffffff>\u7CBE\u826F\u7684\u6218\u58EB\u88C5\u5907\uFF01</color>
+    \n\u8010\u529B\uFF1A{ENDURANCE} \n\u529B\u91CF\uFF1A{STRENGTH} \n\u7269\u7406\u653B\u51FB\uFF1A{PHYSICAL}
+    \n<color=#00ff00ff>\u529B\u91CF: +{STRENGTH}</color> \n\nRequired Level: {MINLEVEL}\n\u6570\u91CF:
+    {AMOUNT}\nbuy: {BUYPRICE} Gold\n<i>Sell: {SELLPRICE} Gold</i>"
+  image: {fileID: 21300000, guid: 4ba61c0cdfa6645ed89ef2fb39421858, type: 3}
+  minLevel: 1
+  cooldown: 0
+  _cooldownCategory: 
+  category: Head
+  modelPrefab: {fileID: 8530923824321910380, guid: f79fdb5b436e33942a30f99c0d889529,
+    type: 3}
+  endurance: 5
+  intellect: 0
+  strength: 2
+  agility: 3
+  spirit: 2
+  physical: 4
+  magic: 0
+  magicCritical: 0
+  magicHitrate: 0
+  physicCritical: 0
+  physicHitrate: 0
+  dodgeChanceBonus: 0
+  blockChanceBonus: 0
+  healthBonus: 0
+  manaBonus: 0
+  dpsBonus: 0
+  attackRate: 0
+  hurtBonus: 0
+  armorBonus: 0
+  magicDefense: 0
+  physicalDefense: 0
+  healthRecovery: 0
+  manaRecovery: 0

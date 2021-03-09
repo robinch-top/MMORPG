@@ -31,11 +31,12 @@ MonoBehaviour:
   cooldown: 0
   _cooldownCategory: 
   category: Legs
-  modelPrefab: {fileID: 0}
-  endurance: 0
+  modelPrefab: {fileID: 5010331181794333665, guid: 82cbcf003f7a070419b77437347439e8,
+    type: 3}
+  endurance: 5
   intellect: 0
-  strength: 0
-  agility: 0
+  strength: 2
+  agility: 3
   spirit: 0
   physical: 0
   magic: 0
@@ -43,13 +44,15 @@ MonoBehaviour:
   magicHitrate: 0
   physicCritical: 0
   physicHitrate: 0
-  dodgeBonus: 0
+  dodgeChanceBonus: 0
   blockChanceBonus: 0
   healthBonus: 0
   manaBonus: 0
+  dpsBonus: 0
+  attackRate: 0
   hurtBonus: 0
   armorBonus: 0
-  deMagic: 0
-  dePhysical: 0
+  magicDefense: 0
+  physicalDefense: 0
   healthRecovery: 0
   manaRecovery: 0

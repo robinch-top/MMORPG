@@ -1,10 +1,105 @@
-#if SERVER
 using ETModel;
 using System.Collections.Generic;
 namespace ETModel
 {
 /// <summary>
-/// 传送unit
+/// MMOServer内网消息
+/// </summary>
+//获取LoginKey
+	[Message(InnerOpcode.GetLoginKey_R2G)]
+	public partial class GetLoginKey_R2G: IRequest
+	{
+		public int RpcId { get; set; }
+
+		public long UserId { get; set; }
+
+	}
+
+//返回LoginKey
+	[Message(InnerOpcode.GetLoginKey_G2R)]
+	public partial class GetLoginKey_G2R: IResponse
+	{
+		public int RpcId { get; set; }
+
+		public int Error { get; set; }
+
+		public string Message { get; set; }
+
+		public long GateLoginKey { get; set; }
+
+	}
+
+//向realm用户发送上线消息
+	[Message(InnerOpcode.PlayerOnline_G2R)]
+	public partial class PlayerOnline_G2R: IMessage
+	{
+		public int RpcId { get; set; }
+
+		public long UserId { get; set; }
+
+		public int GateAppId { get; set; }
+
+	}
+
+//向realm用户发送下线消息
+	[Message(InnerOpcode.PlayerOffline_G2R)]
+	public partial class PlayerOffline_G2R: IMessage
+	{
+		public int RpcId { get; set; }
+
+		public long UserId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.KickOutPlayer_R2G)]
+	public partial class KickOutPlayer_R2G: IRequest
+	{
+		public int RpcId { get; set; }
+
+		public long UserId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.KickOutPlayer_G2R)]
+	public partial class KickOutPlayer_G2R: IResponse
+	{
+		public int RpcId { get; set; }
+
+		public int Error { get; set; }
+
+		public string Message { get; set; }
+
+	}
+
+	[Message(InnerOpcode.CreateUnit_G2M)]
+	public partial class CreateUnit_G2M: IMessage
+	{
+		public int RpcId { get; set; }
+
+		public long UserId { get; set; }
+
+		public long CharaId { get; set; }
+
+		public long GActorId { get; set; }
+
+		public long CActorId { get; set; }
+
+	}
+
+//通知Gate更新User的ActorId
+	[Message(InnerOpcode.Actor_EnterMapSucess_M2G)]
+	public partial class Actor_EnterMapSucess_M2G: IActorMessage
+	{
+		public long ActorId { get; set; }
+
+		public long GamerId { get; set; }
+
+		public long UnitId { get; set; }
+
+	}
+
+/// <summary>
+/// ET
 /// </summary>
 	[Message(InnerOpcode.M2M_TrasferUnitRequest)]
 	public partial class M2M_TrasferUnitRequest: IRequest
@@ -95,6 +190,8 @@ namespace ETModel
 	{
 		public int RpcId { get; set; }
 
+		public bool NeedCache { get; set; }
+
 		public string CollectionName { get; set; }
 
 		public ComponentWithId Component { get; set; }
@@ -116,6 +213,8 @@ namespace ETModel
 	public partial class DBSaveBatchRequest: IRequest
 	{
 		public int RpcId { get; set; }
+
+		public bool NeedCache { get; set; }
 
 		public string CollectionName { get; set; }
 
@@ -141,6 +240,8 @@ namespace ETModel
 
 		public long Id { get; set; }
 
+		public bool NeedCache { get; set; }
+
 		public string CollectionName { get; set; }
 
 	}
@@ -162,6 +263,8 @@ namespace ETModel
 	public partial class DBQueryBatchRequest: IRequest
 	{
 		public int RpcId { get; set; }
+
+		public bool NeedCache { get; set; }
 
 		public string CollectionName { get; set; }
 
@@ -203,6 +306,30 @@ namespace ETModel
 		public string Message { get; set; }
 
 		public List<ComponentWithId> Components = new List<ComponentWithId>();
+
+	}
+
+	[Message(InnerOpcode.DBQuery2JsonRequest)]
+	public partial class DBQuery2JsonRequest: IRequest
+	{
+		public int RpcId { get; set; }
+
+		public string CollectionName { get; set; }
+
+		public string Json { get; set; }
+
+	}
+
+	[Message(InnerOpcode.DBQuery2JsonResponse)]
+	public partial class DBQuery2JsonResponse: IResponse
+	{
+		public int RpcId { get; set; }
+
+		public int Error { get; set; }
+
+		public string Message { get; set; }
+
+		public List<Component> Components = new List<Component>();
 
 	}
 
@@ -380,4 +507,3 @@ namespace ETModel
 	}
 
 }
-#endif

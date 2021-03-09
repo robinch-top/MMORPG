@@ -31,11 +31,12 @@ MonoBehaviour:
   cooldown: 3
   _cooldownCategory: 
   category: Shoulders
-  modelPrefab: {fileID: 0}
+  modelPrefab: {fileID: 2784157706054495394, guid: 3ec28ce9f247c314ab54fcfa4b8dfa95,
+    type: 3}
   endurance: 5
   intellect: 2
-  strength: 4
-  agility: 4
+  strength: 2
+  agility: 3
   spirit: 0
   physical: 3
   magic: 0
@@ -43,13 +44,15 @@ MonoBehaviour:
   magicHitrate: 0
   physicCritical: 0
   physicHitrate: 0
-  dodgeBonus: 0
+  dodgeChanceBonus: 0
   blockChanceBonus: 0
   healthBonus: 0
   manaBonus: 0
+  dpsBonus: 0
+  attackRate: 0
   hurtBonus: 0
   armorBonus: 0
-  deMagic: 0
-  dePhysical: 0
+  magicDefense: 0
+  physicalDefense: 0
   healthRecovery: 0
   manaRecovery: 0

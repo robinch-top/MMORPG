@@ -889,6 +889,7 @@ GameObject:
   - component: {fileID: 7640236688194129059}
   - component: {fileID: 2841585978451196186}
   - component: {fileID: 7719902144903777957}
+  - component: {fileID: 7597351424526902184}
   - component: {fileID: -8818010334324365769}
   - component: {fileID: 7152012843103151699}
   - component: {fileID: 1559578884467577034}
@@ -1225,26 +1226,26 @@ MonoBehaviour:
   slotInfo:
   - requiredCategory: Head
     catName: "\u5934\u90E8"
-    location: {fileID: 0}
+    location: {fileID: 1056562442645543125}
   - requiredCategory: Shoulders
     catName: "\u80A9\u90E8"
-    location: {fileID: 0}
+    location: {fileID: 7617667717210699582}
   - requiredCategory: Chest
     catName: "\u80F8\u90E8"
-    location: {fileID: 0}
+    location: {fileID: 5661610851414031258}
   - requiredCategory: Weapon
     catName: "\u6B66\u5668"
     location: {fileID: 0}
-  - requiredCategory: Hands
+  - requiredCategory: Wrist
     catName: "\u624B\u90E8"
-    location: {fileID: 0}
+    location: {fileID: 5263195706506126535}
   - requiredCategory: Legs
     catName: "\u817F\u90E8"
-    location: {fileID: 0}
-  - requiredCategory: Feet
+    location: {fileID: 6775756156330986441}
+  - requiredCategory: Foot
     catName: "\u811A\u90E8"
-    location: {fileID: 0}
-  - requiredCategory: Shield
+    location: {fileID: 5231582855141145353}
+  - requiredCategory: Offhand
     catName: "\u76FE\u724C"
     location: {fileID: 0}
 --- !u!114 &7719902144903777957
@@ -1262,6 +1263,20 @@ MonoBehaviour:
   player: {fileID: -759458106713629936}
   size: 30
   splitKeys: 300100002f010000
+--- !u!114 &7597351424526902184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753600404129289704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89f3cbe9e699cb41a571290164fd93b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 120922, guid: 45f761684e3010844a6ab41de52ebcab, type: 3}
+  indicator: {fileID: 0}
 --- !u!114 &-8818010334324365769
 MonoBehaviour:
   m_ObjectHideFlags: 0
